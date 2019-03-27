@@ -1,0 +1,7 @@
+<p [ngClass]="{'barrer': isDone()}">
+  {{todo.title |  uppercase}}
+</p>
+<div>
+  <label for="mc">a faire </label>
+  <input type="checkbox" name="mc" id="mc" [checked]="todo.isDone" (change)="handleCheckBoxChange()" >
+</div>
