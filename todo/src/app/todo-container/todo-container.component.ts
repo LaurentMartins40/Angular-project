@@ -10,15 +10,16 @@ export class TodoContainerComponent implements OnInit {
   todos: Array<Todo> = [];
 
   constructor() { }
-
+  addTodo(texte){
+    let x:number= this.todos.length
+    this.todos.push(new Todo(texte, false,x));
+  }
   updateTodo(todo) {
-    let index = this.todos.findIndex(t => t.title === todo.title);
+    let index = this.todos.findIndex(t => t.id === todo.id);
     this.todos[index].isDone = todo.isDone
   }
   ngOnInit() {
-    this.todos = [new Todo('faire le todo container', false),
-    new Todo('faire le todo list', false),
-    new Todo('faire le todo item', false)
-    ]
+    this.todos = [];
+    
   }
 }
