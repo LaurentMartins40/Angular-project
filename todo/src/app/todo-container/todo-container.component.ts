@@ -1,25 +1,22 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../model/Todo';
 import { TodoListComponent } from '../todo-list/todo-list.component';
+import FormationService from 'src/services/todoService';
 @Component({
   selector: 'app-todo-container',
   templateUrl: './todo-container.component.html',
   styleUrls: ['./todo-container.component.css']
 })
 export class TodoContainerComponent implements OnInit {
-  tempTodos: Array<Todo> = [];
-  todos: Array<Todo> = [];
-  constructor() { }
+  todos: Array<Todo>;
+  constructor(public formationService:FormationService) { }
   addTodo(texte){
-    let x:number= this.todos.length;
-    this.tempTodos = this.todos;
-    this.todos = [...this.tempTodos , new Todo(texte, false,x)];
+    this.formationService.addTodo(texte).then(p=>this.todos=p)
   }
   updateTodo(todo) {
-    let index = this.todos.findIndex(t => t.id === todo.id);
-    this.todos[index].isDone = todo.isDone
+    this.formationService.updateTodo(todo).then(p=>this.todos=p)
   }
   ngOnInit() {
-    this.todos = [];
+    this.formationService.getTodo().then(p=>this.todos=p)
   }
 }
