@@ -7,12 +7,13 @@ import { TodoListComponent } from '../todo-list/todo-list.component';
   styleUrls: ['./todo-container.component.css']
 })
 export class TodoContainerComponent implements OnInit {
+  tempTodos: Array<Todo> = [];
   todos: Array<Todo> = [];
-
   constructor() { }
   addTodo(texte){
-    let x:number= this.todos.length
-    this.todos.push(new Todo(texte, false,x));
+    let x:number= this.todos.length;
+    this.tempTodos = this.todos;
+    this.todos = [...this.tempTodos , new Todo(texte, false,x)];
   }
   updateTodo(todo) {
     let index = this.todos.findIndex(t => t.id === todo.id);
@@ -20,6 +21,5 @@ export class TodoContainerComponent implements OnInit {
   }
   ngOnInit() {
     this.todos = [];
-    
   }
 }

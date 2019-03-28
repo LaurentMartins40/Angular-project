@@ -17,14 +17,10 @@ export class TodoFormComponent implements OnInit {
   todoAjout() {
     this.todoAdd.emit(this.title);
   }
-
   handleChange(event) {
    this.title=event.target.value
   }
   constructor() { }
-
-  
   ngOnInit() {
   }
-
 }
