@@ -6,22 +6,14 @@ import TodoApi from './TodoApi';
 export default class FormationService {
     todos: Array<Todo> = [];
     tempTodos: Array<Todo>
-    constructor(private TodoApi: TodoApi) { }
-    getTodo(): Promise<Array<Todo>> {
-        return new Promise((resolve) => {{
-            resolve(this.todos)
-        };
-    });
+    constructor(private todoApi: TodoApi) { }
+    getTodo(){
+        return this.todoApi.getTodo()
     }
-    addTodo(texte){
-        let x:number= this.todos.length;
-        this.tempTodos = this.todos;
-        this.todos = [...this.tempTodos , new Todo(texte, false,x)];
-        return this.getTodo()
+    addTodo(texte) {
+        return this.todoApi.addTodo(texte)
     }
     updateTodo(todo) {
-        let index = this.todos.findIndex(t => t.id === todo.id);
-        this.todos[index].isDone = todo.isDone
-        return this.getTodo()
+        return this.todoApi.updateTodo(todo);
     }
 }
